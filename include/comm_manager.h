@@ -136,6 +136,7 @@ private:
   void param_request_read_callback(uint8_t target_system, const char* const param_name, int16_t param_index) override;
   void param_set_int_callback(uint8_t target_system, const char* const param_name, int32_t param_value) override;
   void param_set_float_callback(uint8_t target_system, const char* const param_name, float param_value) override;
+  void norobo_command_callback(const CommLinkInterface::NoroboCustomCommand &command);
   void command_callback(CommLinkInterface::Command command) override;
   void timesync_callback(int64_t tc1, int64_t ts1) override;
   void offboard_control_callback(const CommLinkInterface::OffboardControl& control) override;

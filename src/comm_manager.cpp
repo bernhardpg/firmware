@@ -311,6 +311,16 @@ void CommManager::timesync_callback(int64_t tc1, int64_t ts1)
     comm_link_.send_timesync(sysid_, static_cast<int64_t>(now_us)*1000, ts1);
 }
 
+
+void CommManager::norobo_command_callback(const CommLinkInterface::NoroboCustomCommand &command) {
+  if (command.arm) {
+    RF_.state_manager_.set_event(StateManager::EVENT_REQUEST_ARM);
+  }
+  else{
+    RF_.state_manager_.set_event(StateManager::EVENT_REQUEST_DISARM);
+  }
+}
+
 void CommManager::offboard_control_callback(const CommLinkInterface::OffboardControl& control)
 {
   // put values into a new command struct

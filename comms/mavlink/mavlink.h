@@ -110,6 +110,7 @@ private:
   void handle_msg_param_request_list(const mavlink_message_t *const msg);
   void handle_msg_param_request_read(const mavlink_message_t *const msg);
   void handle_msg_param_set(const mavlink_message_t *const msg);
+  void handle_msg_norobo_command(const mavlink_message_t *const msg);
   void handle_msg_offboard_control(const mavlink_message_t *const msg);
   void handle_msg_external_attitude(const mavlink_message_t *const msg);
   void handle_msg_rosflight_cmd(const mavlink_message_t *const msg);

@@ -93,6 +93,11 @@ public:
     Channel F;
   };
 
+  struct NoroboCustomCommand
+  {
+    bool arm;
+  };
+
   struct AuxCommand
   {
     enum class Type
@@ -119,6 +124,7 @@ public:
       virtual void param_set_int_callback(uint8_t target_system, const char *const param_name, int32_t param_value) = 0;
       virtual void param_set_float_callback(uint8_t target_system, const char *const param_name, float param_value) = 0;
       virtual void command_callback(Command command) = 0;
+      virtual void norobo_command_callback(const NoroboCustomCommand &command) = 0;
       virtual void timesync_callback(int64_t tc1, int64_t ts1) = 0;
       virtual void offboard_control_callback(const OffboardControl &control) = 0;
       virtual void aux_command_callback(const AuxCommand &command) = 0;

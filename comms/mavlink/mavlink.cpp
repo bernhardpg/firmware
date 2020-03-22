@@ -31,7 +31,6 @@
 #include <cstdint>
 
 #include "board.h"
-
 #include "mavlink.h"
 
 namespace rosflight_firmware
@@ -513,6 +512,19 @@ void Mavlink::handle_msg_timesync(const mavlink_message_t *const msg)
     listener_->timesync_callback(tsync.tc1, tsync.ts1);
 }
 
+  void Mavlink::handle_msg_norobo_command(const mavlink_message_t *const msg)
+  {
+    mavlink_norobo_custom_command_t ctrl;
+    mavlink_msg_norobo_custom_command_decode(msg, &ctrl);
+
+    CommLinkInterface::NoroboCustomCommand command;
+
+    command.arm = ctrl.arm;
+
+    if (listener_ != nullptr)
+      listener_->norobo_command_callback(command);
+  }
+
 void Mavlink::handle_msg_offboard_control(const mavlink_message_t *const msg)
 {
   mavlink_offboard_control_t ctrl;
@@ -579,6 +591,9 @@ void Mavlink::handle_mavlink_message()
   {
   case MAVLINK_MSG_ID_OFFBOARD_CONTROL:
     handle_msg_offboard_control(&in_buf_);
+    break;
+  case MAVLINK_MSG_ID_NOROBO_CUSTOM_COMMAND:
+    handle_msg_norobo_command(&in_buf_);
     break;
   case MAVLINK_MSG_ID_PARAM_REQUEST_LIST:
     handle_msg_param_request_list(&in_buf_);
