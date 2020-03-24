@@ -6,4 +6,4 @@
 	url = https://github.com/rosflight/airbourne_f4.git
 [submodule "comms/mavlink/v1.0"]
 	path = comms/mavlink/v1.0
-	url = https://github.com/larserikfagernaes/-mavlink_c_library_rosflight.git
+	url = https://github.com/larserikfagernaes/-mavlink_c_library_rosflight
